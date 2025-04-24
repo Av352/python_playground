@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kid-Friendly Python Playground</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+    <div class="container">
+        <h1>🐍 Kid-Friendly Python Playground</h1>
+       
+        <textarea id="codeInput" placeholder="Type your Python code here...">print("Hello, world!")</textarea>
+       
+        <button id="runButton">▶️ Run Code</button>
+       
+        <h2>📤 Output:</h2>
+        <pre id="outputArea">Your output will appear here...</pre>
+    </div>
+    <script>
+        document.getElementById("runButton").addEventListener("click", async () => {
+            const code = document.getElementById("codeInput").value;
+            const outputArea = document.getElementById("outputArea");
+            outputArea.textContent = "⏳ Running...";
+            try {
+                const response = await fetch("/run", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ code })
+                });
+                const data = await response.json();
+                outputArea.textContent = data.output || "⚠️ No output.";
+            } catch (error) {
+                outputArea.textContent = "❌ Error running code.";
+            }
+        });
+    </script>
+</body>
+</html> 
