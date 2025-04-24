@@ -22,5 +22,5 @@ To run this project locally, follow these steps:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/kid-friendly-python-playground.git
+git clone https://github.com/av352/python_playground.git
 cd kid-friendly-python-playground
